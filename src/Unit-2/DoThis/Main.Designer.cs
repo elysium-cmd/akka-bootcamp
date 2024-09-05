@@ -32,9 +32,10 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.sysChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.addSeries = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sysChart)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // sysChart
             // 
             chartArea1.Name = "ChartArea1";
@@ -52,24 +53,36 @@
             this.sysChart.TabIndex = 0;
             this.sysChart.Text = "sysChart";
             // 
+            // addSeries
+            // 
+            addSeries.Location = new System.Drawing.Point(679, 425);
+            addSeries.Name = "addSeries";
+            addSeries.Size = new System.Drawing.Size(75, 23);
+            addSeries.TabIndex = 1;
+            addSeries.Text = "Add Series";
+            addSeries.UseVisualStyleBackColor = true;
+            addSeries.Click += addSeries_Click;
+            // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 446);
-            this.Controls.Add(this.sysChart);
-            this.Name = "Main";
-            this.Text = "System Metrics";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
-            this.Load += new System.EventHandler(this.Main_Load);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(798, 515);
+            Controls.Add(addSeries);
+            Controls.Add(sysChart);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "Main";
+            Text = "System Metrics";
+            FormClosing += Main_FormClosing;
+            Load += Main_Load;
             ((System.ComponentModel.ISupportInitialize)(this.sysChart)).EndInit();
-            this.ResumeLayout(false);
-
+            ResumeLayout(false);
         }
 
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart sysChart;
+        private System.Windows.Forms.Button addSeries;
     }
 }
 
