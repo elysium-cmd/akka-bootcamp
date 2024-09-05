@@ -11,12 +11,6 @@ namespace WinTail
     {
         public const string StartCommand = "start";
         public const string ExitCommand = "exit";
-        private IActorRef _validationActor;
-
-        public ConsoleReaderActor(IActorRef consoleWriterActor)
-        {
-            _validationActor = consoleWriterActor;
-        }
 
         protected override void OnReceive(object message)
         {
@@ -40,7 +34,7 @@ namespace WinTail
                 return;
             }
 
-            _validationActor.Tell(message);
+            Context.ActorSelection("akka://MyActorSystem/user/fileValidationActor").Tell(message);
         }
         #endregion
     }

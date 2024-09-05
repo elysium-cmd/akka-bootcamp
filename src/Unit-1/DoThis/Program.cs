@@ -16,9 +16,9 @@ namespace WinTail
             IActorRef consoleWriterActor = MyActorSystem.ActorOf(consoleWriterProps, "consoleWriterActor");
             Props tailCoordinatorProps = Props.Create(() => new TailCoordinatorActor());
             IActorRef tailCoordinatorActor = MyActorSystem.ActorOf(tailCoordinatorProps, "tailCoordinatorActor");
-            Props fileValidationActorProps = Props.Create(() => new FileValidationActor(consoleWriterActor, tailCoordinatorActor));
+            Props fileValidationActorProps = Props.Create(() => new FileValidationActor(consoleWriterActor));
             IActorRef fileValidationActor = MyActorSystem.ActorOf(fileValidationActorProps, "fileValidationActor");
-            Props consoleReaderProps = Props.Create(() => new ConsoleReaderActor(fileValidationActor));
+            Props consoleReaderProps = Props.Create(() => new ConsoleReaderActor());
             IActorRef consoleReaderActor = MyActorSystem.ActorOf(consoleReaderProps, "consoleReaderActor");
 
             // tell console reader to begin
