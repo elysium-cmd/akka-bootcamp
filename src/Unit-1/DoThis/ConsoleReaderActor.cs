@@ -11,20 +11,17 @@ namespace WinTail
     {
         public const string StartCommand = "start";
         public const string ExitCommand = "exit";
-        private IActorRef _consoleWriterActor;
+        private IActorRef _validationActor;
 
         public ConsoleReaderActor(IActorRef consoleWriterActor)
         {
-            _consoleWriterActor = consoleWriterActor;
+            _validationActor = consoleWriterActor;
         }
 
         protected override void OnReceive(object message)
         {
             if (message.Equals(StartCommand))
                 DoPrintInstructions();
-            else if (message is Messages.InputError)
-                _consoleWriterActor.Tell(message as Messages.InputError);
-
             GetAndValidateInput();
         }
 
@@ -39,26 +36,13 @@ namespace WinTail
         private void GetAndValidateInput()
         {
             var message = Console.ReadLine();
-            if (string.IsNullOrEmpty(message))
-                Self.Tell(new Messages.NullInputError("No input received."));
-            else if (String.Equals(message, ExitCommand, StringComparison.OrdinalIgnoreCase))
-                Context.System.Terminate();
-            else
+            if(!string.IsNullOrEmpty(message) && String.Equals(message, ExitCommand, StringComparison.OrdinalIgnoreCase))
             {
-                var valid = IsValid(message);
-                if (valid)
-                {
-                    _consoleWriterActor.Tell(new Messages.InputSuccess("Thank you! Message was valid."));
-                    Self.Tell(new Messages.ContinueProcessing());
-                }
-                else
-                    Self.Tell(new Messages.ValidationError("Invalid: input had odd number of characters."));
+                Context.System.Terminate();
+                return;
             }
-        }
 
-        private static bool IsValid(string message)
-        {
-            return message.Length % 2 == 0;
+            _validationActor.Tell(message);
         }
         #endregion
     }
