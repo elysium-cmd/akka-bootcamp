@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 using Akka.Actor;
 
@@ -8,6 +9,16 @@ namespace ChartApp.Actors
 {
     public class ChartingActor : ReceiveActor
     {
+        /// <summary>
+        /// Maximum number of points we will allow in a series
+        /// </summary>
+        public const int MaxPoints = 250;
+
+        /// <summary>
+        /// Incrementing counter we use to plot along the X-axis
+        /// </summary>
+        private int xPosCounter = 0;
+
         #region Messages
 
         public class InitializeChart
@@ -20,30 +31,36 @@ namespace ChartApp.Actors
             public Dictionary<string, Series> InitialSeries { get; private set; }
         }
 
+        /// <summary>
+        /// Add a new <see cref="Series"/> to the chart
+        /// </summary>
         public class AddSeries
         {
-            public Series Series { get; private set; }
             public AddSeries(Series series)
             {
                 Series = series;
             }
+
+            public Series Series { get; private set; }
         }
 
+        /// <summary>
+        /// Remove an existing <see cref="Series"/> from the chart
+        /// </summary>
         public class RemoveSeries
         {
-            public string SeriesName { get; private set; }
-
             public RemoveSeries(string seriesName)
             {
                 SeriesName = seriesName;
             }
+
+            public string SeriesName { get; private set; }
         }
+
         #endregion
 
         private readonly Chart _chart;
         private Dictionary<string, Series> _seriesIndex;
-        public const int MaxPoints = 250;
-        private int xPosCounter = 0;
 
         public ChartingActor(Chart chart) : this(chart, new Dictionary<string, Series>())
         {
@@ -73,9 +90,11 @@ namespace ChartApp.Actors
             //delete any existing series
             _chart.Series.Clear();
 
+            //set the axes up
             var area = _chart.ChartAreas[0];
             area.AxisX.IntervalType = DateTimeIntervalType.Number;
             area.AxisY.IntervalType = DateTimeIntervalType.Number;
+
             SetChartBoundaries();
 
             //attempt to render the initial chart
@@ -118,16 +137,14 @@ namespace ChartApp.Actors
             if (!string.IsNullOrEmpty(metric.Series) && _seriesIndex.ContainsKey(metric.Series))
             {
                 var series = _seriesIndex[metric.Series];
-                if (series.Points == null)
-                    return;
+                if (series.Points == null) return; // means we're shutting down
                 series.Points.AddXY(xPosCounter++, metric.CounterValue);
-                while (series.Points.Count > 0)
-                { 
-                    series.Points.RemoveAt(0); 
-                }
+                while(series.Points.Count > MaxPoints) series.Points.RemoveAt(0);
                 SetChartBoundaries();
             }
         }
+
+        #endregion
 
         private void SetChartBoundaries()
         {
@@ -155,6 +172,5 @@ namespace ChartApp.Actors
                 area.AxisX.Maximum = maxAxisX;
             }
         }
-        #endregion
     }
 }
