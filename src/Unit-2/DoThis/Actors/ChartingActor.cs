@@ -121,7 +121,7 @@ namespace ChartApp.Actors
                 if (series.Points == null)
                     return;
                 series.Points.AddXY(xPosCounter++, metric.CounterValue);
-                while (series.Points.Count > 0)
+                while (series.Points.Count > MaxPoints)
                 { 
                     series.Points.RemoveAt(0); 
                 }
