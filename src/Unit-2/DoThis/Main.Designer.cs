@@ -31,12 +31,12 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.sysChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.btnCpu = new System.Windows.Forms.Button();
-            this.btnMemory = new System.Windows.Forms.Button();
-            this.btnDisk = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.sysChart)).BeginInit();
-            this.SuspendLayout();
+            sysChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            cpuButton = new System.Windows.Forms.Button();
+            memoryButton = new System.Windows.Forms.Button();
+            diskButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(sysChart)).BeginInit();
+            SuspendLayout();
             // 
             // sysChart
             // 
@@ -55,63 +55,60 @@
             this.sysChart.TabIndex = 0;
             this.sysChart.Text = "sysChart";
             // 
-            // btnCpu
+            // cpuButton
             // 
-            this.btnCpu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCpu.Location = new System.Drawing.Point(562, 274);
-            this.btnCpu.Name = "btnCpu";
-            this.btnCpu.Size = new System.Drawing.Size(110, 41);
-            this.btnCpu.TabIndex = 1;
-            this.btnCpu.Text = "CPU (ON)";
-            this.btnCpu.UseVisualStyleBackColor = true;
-            this.btnCpu.Click += new System.EventHandler(this.btnCpu_Click);
+            cpuButton.Location = new System.Drawing.Point(670, 329);
+            cpuButton.Name = "cpuButton";
+            cpuButton.Size = new System.Drawing.Size(100, 40);
+            cpuButton.TabIndex = 1;
+            cpuButton.Text = "CPU (ON)";
+            cpuButton.UseVisualStyleBackColor = true;
+            cpuButton.Click += cpuButton_Click;
             // 
-            // btnMemory
+            // memoryButton
             // 
-            this.btnMemory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMemory.Location = new System.Drawing.Point(562, 321);
-            this.btnMemory.Name = "btnMemory";
-            this.btnMemory.Size = new System.Drawing.Size(110, 41);
-            this.btnMemory.TabIndex = 2;
-            this.btnMemory.Text = "MEMORY (OFF)";
-            this.btnMemory.UseVisualStyleBackColor = true;
-            this.btnMemory.Click += new System.EventHandler(this.btnMemory_Click);
+            memoryButton.Location = new System.Drawing.Point(670, 375);
+            memoryButton.Name = "memoryButton";
+            memoryButton.Size = new System.Drawing.Size(100, 40);
+            memoryButton.TabIndex = 2;
+            memoryButton.Text = "MEMORY (OFF)";
+            memoryButton.UseVisualStyleBackColor = true;
+            memoryButton.Click += memoryButton_Click;
             // 
-            // btnDisk
+            // diskButton
             // 
-            this.btnDisk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDisk.Location = new System.Drawing.Point(562, 368);
-            this.btnDisk.Name = "btnDisk";
-            this.btnDisk.Size = new System.Drawing.Size(110, 41);
-            this.btnDisk.TabIndex = 3;
-            this.btnDisk.Text = "DISK (OFF)";
-            this.btnDisk.UseVisualStyleBackColor = true;
-            this.btnDisk.Click += new System.EventHandler(this.btnDisk_Click);
+            diskButton.Location = new System.Drawing.Point(670, 421);
+            diskButton.Name = "diskButton";
+            diskButton.Size = new System.Drawing.Size(100, 40);
+            diskButton.TabIndex = 3;
+            diskButton.Text = "DISK (OFF)";
+            diskButton.UseVisualStyleBackColor = true;
+            diskButton.Click += diskButton_Click;
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 446);
-            this.Controls.Add(this.btnDisk);
-            this.Controls.Add(this.btnMemory);
-            this.Controls.Add(this.btnCpu);
-            this.Controls.Add(this.sysChart);
-            this.Name = "Main";
-            this.Text = "System Metrics";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
-            this.Load += new System.EventHandler(this.Main_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.sysChart)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(798, 515);
+            Controls.Add(diskButton);
+            Controls.Add(memoryButton);
+            Controls.Add(cpuButton);
+            Controls.Add(sysChart);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "Main";
+            Text = "System Metrics";
+            FormClosing += Main_FormClosing;
+            Load += Main_Load;
+            ((System.ComponentModel.ISupportInitialize)(sysChart)).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart sysChart;
-        private System.Windows.Forms.Button btnCpu;
-        private System.Windows.Forms.Button btnMemory;
-        private System.Windows.Forms.Button btnDisk;
+        private System.Windows.Forms.Button cpuButton;
+        private System.Windows.Forms.Button memoryButton;
+        private System.Windows.Forms.Button diskButton;
     }
 }
 
