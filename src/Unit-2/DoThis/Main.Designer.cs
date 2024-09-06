@@ -35,6 +35,7 @@
             cpuButton = new System.Windows.Forms.Button();
             memoryButton = new System.Windows.Forms.Button();
             diskButton = new System.Windows.Forms.Button();
+            pauseButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(sysChart)).BeginInit();
             SuspendLayout();
             // 
@@ -55,12 +56,22 @@
             this.sysChart.TabIndex = 0;
             this.sysChart.Text = "sysChart";
             // 
+            // pauseButton 
+            // 
+            pauseButton.Location = new System.Drawing.Point(670, 275);
+            pauseButton.Name = "cpuButton";
+            pauseButton.Size = new System.Drawing.Size(100, 40);
+            pauseButton.TabIndex = 1;
+            pauseButton.Text = "PAUSE ||";
+            pauseButton.UseVisualStyleBackColor = true;
+            pauseButton.Click += pauseButton_Click;
+            // 
             // cpuButton
             // 
             cpuButton.Location = new System.Drawing.Point(670, 329);
             cpuButton.Name = "cpuButton";
             cpuButton.Size = new System.Drawing.Size(100, 40);
-            cpuButton.TabIndex = 1;
+            cpuButton.TabIndex = 2;
             cpuButton.Text = "CPU (ON)";
             cpuButton.UseVisualStyleBackColor = true;
             cpuButton.Click += cpuButton_Click;
@@ -70,7 +81,7 @@
             memoryButton.Location = new System.Drawing.Point(670, 375);
             memoryButton.Name = "memoryButton";
             memoryButton.Size = new System.Drawing.Size(100, 40);
-            memoryButton.TabIndex = 2;
+            memoryButton.TabIndex = 3;
             memoryButton.Text = "MEMORY (OFF)";
             memoryButton.UseVisualStyleBackColor = true;
             memoryButton.Click += memoryButton_Click;
@@ -80,7 +91,7 @@
             diskButton.Location = new System.Drawing.Point(670, 421);
             diskButton.Name = "diskButton";
             diskButton.Size = new System.Drawing.Size(100, 40);
-            diskButton.TabIndex = 3;
+            diskButton.TabIndex = 4;
             diskButton.Text = "DISK (OFF)";
             diskButton.UseVisualStyleBackColor = true;
             diskButton.Click += diskButton_Click;
@@ -93,6 +104,7 @@
             Controls.Add(diskButton);
             Controls.Add(memoryButton);
             Controls.Add(cpuButton);
+            Controls.Add(pauseButton);
             Controls.Add(sysChart);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "Main";
@@ -109,6 +121,7 @@
         private System.Windows.Forms.Button cpuButton;
         private System.Windows.Forms.Button memoryButton;
         private System.Windows.Forms.Button diskButton;
+        private System.Windows.Forms.Button pauseButton;
     }
 }
 
